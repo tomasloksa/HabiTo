@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.habito.HabitsFragment;
 import com.example.habito.R;
+import com.example.habito.TasksFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -27,9 +29,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        switch (position){
+            case 0: //Page number 1
+                return HabitsFragment.newInstance(1);
+            case 1: //Page number 2
+                return TasksFragment.newInstance(1);
+            default:
+                return null;
+        }
     }
 
     @Nullable
