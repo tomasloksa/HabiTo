@@ -7,11 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.habito.dummy.DummyContent;
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
@@ -23,11 +24,14 @@ public class TasksFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
 
+    private ArrayList<TasksItem> tasks = new ArrayList<>();
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
     public TasksFragment() {
+        this.tasks.add(new TasksItem("69", "test", "bu"));
     }
 
     // TODO: Customize parameter initialization
@@ -38,6 +42,12 @@ public class TasksFragment extends Fragment {
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void addItem(String name) {
+        this.tasks.add(new TasksItem("1", name, "tutu"));
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
 
     @Override
@@ -63,8 +73,9 @@ public class TasksFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(this.tasks));
         }
         return view;
     }
 }
+

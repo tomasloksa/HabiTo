@@ -7,19 +7,17 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.habito.dummy.DummyContent.DummyItem;
-
-import java.util.List;
+import java.util.ArrayList;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem}.
+ * {@link RecyclerView.Adapter} that can display a {@link TasksItem}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyTaskRecyclerViewAdapter extends RecyclerView.Adapter<MyTaskRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final ArrayList<TasksItem> mValues;
 
-    public MyTaskRecyclerViewAdapter(List<DummyItem> items) {
+    public MyTaskRecyclerViewAdapter(ArrayList<TasksItem> items) {
         mValues = items;
     }
 
@@ -46,7 +44,7 @@ public class MyTaskRecyclerViewAdapter extends RecyclerView.Adapter<MyTaskRecycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public TasksItem mItem;
 
         public ViewHolder(View view) {
             super(view);
