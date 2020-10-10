@@ -54,6 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_delete" />
+        app:backgroundTint="?android:attr/textColorLink"
+        app:rippleColor="@color/cardview_light_background"
+        app:srcCompat="@drawable/ic_action_name" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
