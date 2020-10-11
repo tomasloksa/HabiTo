@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.habito.ui.main.SectionsPagerAdapter;
@@ -31,5 +32,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // Toolbar
+        Toolbar mainToolbar = (Toolbar) findViewById(R.id.Main_toolbar);
+        setSupportActionBar(mainToolbar);
     }
 }
