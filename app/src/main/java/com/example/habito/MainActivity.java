@@ -22,6 +22,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     static final int CREATE_TASK = 1;
+    static final int CREATE_HABIT = 2;
+
+    private Fragment currentFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,20 +38,21 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton add_button = findViewById(R.id.add_button);
 
         // Toolbar
-        Toolbar mainToolbar = (Toolbar) findViewById(R.id.Main_toolbar);
+        Toolbar mainToolbar = findViewById(R.id.Main_toolbar);
         setSupportActionBar(mainToolbar);
     }
 
     public void addItem(View view) {
         ViewPager viewPager = findViewById(R.id.view_pager);
-        Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.view_pager + ":" + viewPager.getCurrentItem());
+        this.currentFragment = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.view_pager + ":" + viewPager.getCurrentItem());
         // based on the current position you can then cast the page to the correct
         // class and call the method:
-
-        if (page != null) {
-            if (page instanceof HabitsFragment)
-                ((HabitsFragment) page).addItem("rudud");
-            else if (page instanceof TasksFragment) {
+        if (this.currentFragment != null) {
+            if (this.currentFragment instanceof HabitsFragment) {
+                Intent intent = new Intent(this, AddHabit.class);
+                startActivityForResult(intent, this.CREATE_HABIT);
+            }
+            else if (this.currentFragment instanceof TasksFragment) {
                 Intent intent = new Intent(this, AddTask.class);
                 startActivityForResult(intent, this.CREATE_TASK);
             }
@@ -59,12 +64,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == this.CREATE_TASK) {
             if (resultCode == RESULT_OK) {
-                ViewPager viewPager = findViewById(R.id.view_pager);
-                Fragment page = getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.view_pager + ":" + viewPager.getCurrentItem());
-                if (page != null)
-                    ((TasksFragment) page).addItem(data.getData().toString());
+                ((TasksFragment) this.currentFragment).addItem(data.getData().toString());
             }
-        });
+        }
+        else if (requestCode == this.CREATE_HABIT) {
+            if (resultCode == RESULT_OK) {
+                ((HabitsFragment) this.currentFragment).addItem(data.getData().toString());
+            }
         }
     }
 }
