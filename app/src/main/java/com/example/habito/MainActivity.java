@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.habito.ui.main.SectionsPagerAdapter;
@@ -31,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton add_button = findViewById(R.id.add_button);
+
+        // Toolbar
+        Toolbar mainToolbar = (Toolbar) findViewById(R.id.Main_toolbar);
+        setSupportActionBar(mainToolbar);
     }
 
     public void addItem(View view) {
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 if (page != null)
                     ((TasksFragment) page).addItem(data.getData().toString());
             }
+        });
         }
     }
 }
